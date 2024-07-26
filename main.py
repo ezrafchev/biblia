@@ -15,16 +15,19 @@ def get_random_chapter():
         if response.status_code == 200:
             data = response.json()
             verses = data["verses"]
-            chapter_text = "\n".join([verse["text"] for verse in verses])
-            return chapter_text
+            chapter_text = "\n".join([f"{verse['verse']}: {verse['text']}" for verse in verses])
+            return book, chapter, chapter_text
         else:
             print("Capítulo não encontrado. Tentando outro capítulo...")
 
 # Function to display the chapter of the day
 def display_chapter():
     today = datetime.now().strftime("%Y-%m-%d")
-    chapter = get_random_chapter()
-    print(f"Capítulo do dia ({today}):\n\n{chapter}")
+    book, chapter, chapter_text = get_random_chapter()
+    print(f"Capítulo do dia ({today}):\n")
+    print(f"Livro: {book.capitalize()}\nCapítulo: {chapter}\n")
+    print(f"{chapter_text}\n")
+    print("Comentário: Que este capítulo possa trazer paz e reflexão para o seu dia.")
 
 def main():
     display_chapter()

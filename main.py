@@ -24,7 +24,9 @@ book_chapters = {
 # Function to get a random chapter
 def get_random_chapter():
     books = list(book_chapters.keys())
-    while True:
+    attempts = 0
+    max_attempts = 10
+    while attempts < max_attempts:
         book = random.choice(books)
         max_chapter = book_chapters[book]
         chapter = random.randint(1, max_chapter)
@@ -38,15 +40,21 @@ def get_random_chapter():
             return book, chapter, chapter_text
         else:
             print("Capítulo não encontrado. Tentando outro capítulo...")
+            attempts += 1
+    return None, None, "Não foi possível encontrar um capítulo válido após várias tentativas."
 
 # Function to display the chapter of the day
 def display_chapter():
     today = datetime.now().strftime("%Y-%m-%d")
     book, chapter, chapter_text = get_random_chapter()
-    print(f"Capítulo do dia ({today}):\n")
-    print(f"Livro: {book.capitalize()}\nCapítulo: {chapter}\n")
-    print(f"{chapter_text}\n")
-    print("Comentário: Que este capítulo possa trazer paz e reflexão para o seu dia.")
+    if book and chapter:
+        print(f"Capítulo do dia ({today}):\n")
+        print(f"Livro: {book.capitalize()}\nCapítulo: {chapter}\n")
+        print(f"{chapter_text}\n")
+        print("Comentário: Este capítulo nos ensina sobre a importância da fé e da obediência a Deus. Que possamos refletir sobre essas palavras e aplicá-las em nossas vidas diárias.")
+    else:
+        print(f"Capítulo do dia ({today}):\n")
+        print(f"{chapter_text}\n")
 
 def main():
     display_chapter()

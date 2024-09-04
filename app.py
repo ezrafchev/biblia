@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+
+from flask import Flask, render_template, jsonify
 import random
 import requests
 from datetime import datetime
@@ -50,7 +51,7 @@ def index():
     if book and chapter:
         return render_template('index.html', date=today, book=book.capitalize(), chapter=chapter, chapter_text=chapter_text)
     else:
-        return render_template('index.html', date=today, book="N/A", chapter="N/A", chapter_text=chapter_text)
+        return render_template('index.html', date=today, chapter_text=chapter_text)
 
 if __name__ == '__main__':
     app.run(debug=True)

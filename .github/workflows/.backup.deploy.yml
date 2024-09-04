@@ -23,13 +23,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install flask gunicorn
 
-    - name: Build and deploy
+    - name: Build
       run: |
-        echo "web: gunicorn app:app" > Procfile
-        git add Procfile
-        git commit -m "Add Procfile for deployment"
-        git push
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
-        git remote add heroku https://git.heroku.com/your-app-name.git
-        git push heroku main
+        mkdir -p build
+        cp -r * build/
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build

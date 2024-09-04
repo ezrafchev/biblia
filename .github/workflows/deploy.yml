@@ -27,7 +27,7 @@ jobs:
     - name: Build the site
       run: |
         mkdir -p public
-        cp -r * public/
+        cp -r !(.github|public) public/
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

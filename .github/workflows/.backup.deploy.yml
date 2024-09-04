@@ -22,15 +22,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flask requests
+        pip install flask
 
-    - name: Build and deploy
+    - name: Build the site
       run: |
-        mkdir -p build
-        cp -r !(build) build/
-        touch public/.nojekyll
-      env:
-        GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+        mkdir -p public
+        cp -r * public/
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

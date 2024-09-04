@@ -27,7 +27,8 @@ jobs:
     - name: Build and deploy
       run: |
         mkdir -p public
-        cp -r * public/
+        shopt -s extglob
+        cp -r !(public) public/
         touch public/.nojekyll
       env:
         GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}

@@ -27,7 +27,7 @@ jobs:
     - name: Build and deploy
       run: |
         mkdir -p public
-        cp -r !(public) public/
+        cp -r * public/
         touch public/.nojekyll
       env:
         GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
